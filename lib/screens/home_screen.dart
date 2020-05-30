@@ -1,0 +1,168 @@
+import 'package:biologyquiz/model/chapter.dart';
+import 'package:biologyquiz/screens/questions_screen.dart';
+import 'package:biologyquiz/screens/settings_screen.dart';
+import 'package:biologyquiz/util/data_store.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.purple,
+              Colors.blue,
+            ]
+          ),
+
+            color: Colors.green),
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Biology\nQuiz',
+                    style:
+                        TextStyle(fontSize: 40.0, fontWeight: FontWeight.w600, letterSpacing: 1.2, color: Colors.white.withOpacity(0.9)),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.settings, color: Colors.white.withOpacity(0.9),),
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context){
+                          return SettingsScreen();
+                        }
+                      ));
+                    },
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.topCenter,
+                //color: Colors.green,
+                child: Swiper(
+                  itemCount: DataStore.allChapters().length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ChapterCard(DataStore.allChapters()[index]);
+                  },
+                  itemWidth: 300,
+                  layout: SwiperLayout.STACK,
+                  pagination: SwiperPagination(),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ChapterCard extends StatelessWidget {
+  final Chapter chapter;
+
+  ChapterCard(this.chapter);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        alignment: Alignment.topCenter,
+        width: 250.0,
+        height: 550,
+        //color: Colors.pink,
+
+        child: Stack(
+          children: <Widget>[
+            Container(
+              width: 250.0,
+              height: 550.0,
+              //color: Colors.grey,
+            ),
+            Positioned(
+              top: 75,
+              width: 250,
+              height: 350,
+              child: Container(
+                padding: EdgeInsets.only(top: 100),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    border: Border.all(color: Colors.grey[300]),
+                    color: Colors.white),
+                child: Container(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Text(
+                              '${chapter.name}',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.7)),
+                            )),
+                        SizedBox(height: 8.0,),
+                        Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Text(
+                              '${chapter.name}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.7)),
+                            )),
+                        Spacer(),
+
+                        InkWell(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context){
+                               return QuestionsScreen(chapter: chapter);
+                              }
+                            ));
+                          },
+                          child: Container(
+
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Text('Start Quiz', style: TextStyle(color: Colors.green),),
+                                IconButton(icon: Icon(Icons.arrow_right,color: Colors.green,),),
+                              ],
+                            ),
+                          ),
+                        )
+                      ]),
+                ),
+              ),
+            ),
+            Positioned(
+              left: 50,
+              child: Container(
+                alignment: Alignment.center,
+                width: 150.0,
+                height: 150.0,
+                child: Image.asset('assets/images/bio.png'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
