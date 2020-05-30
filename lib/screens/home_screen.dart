@@ -2,8 +2,10 @@ import 'package:biologyquiz/model/chapter.dart';
 import 'package:biologyquiz/screens/questions_screen.dart';
 import 'package:biologyquiz/screens/settings_screen.dart';
 import 'package:biologyquiz/util/data_store.dart';
+import 'package:biologyquiz/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,16 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.purple,
-              Colors.blue,
-            ]
-          ),
-
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.purple,
+                  Colors.blue,
+                ]),
             color: Colors.green),
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
@@ -38,17 +37,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   Text(
                     'Biology\nQuiz',
-                    style:
-                        TextStyle(fontSize: 40.0, fontWeight: FontWeight.w600, letterSpacing: 1.2, color: Colors.white.withOpacity(0.9)),
+                    style: TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.2,
+                        color: Colors.white.withOpacity(0.9)),
                   ),
                   IconButton(
-                    icon: Icon(Icons.settings, color: Colors.white.withOpacity(0.9),),
-                    onPressed: (){
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context){
-                          return SettingsScreen();
-                        }
-                      ));
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.white.withOpacity(0.9),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return SettingsScreen();
+                      }));
                     },
                   )
                 ],
@@ -63,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return ChapterCard(DataStore.allChapters()[index]);
                   },
-                  itemWidth: 300,
+                  itemWidth: 250,
                   layout: SwiperLayout.STACK,
                   pagination: SwiperPagination(),
                 ),
@@ -116,33 +120,74 @@ class ChapterCard extends StatelessWidget {
                             child: Text(
                               '${chapter.name}',
                               style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.7)),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black.withOpacity(0.7)),
                             )),
-                        SizedBox(height: 8.0,),
+                        SizedBox(
+                          height: 8.0,
+                        ),
                         Container(
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
                             child: Text(
                               '${chapter.name}',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.7)),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black.withOpacity(0.7)),
                             )),
                         Spacer(),
-
                         InkWell(
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context){
-                               return QuestionsScreen(chapter: chapter);
-                              }
-                            ));
+                          onTap: () async {
+                            if (await Util.isInternetAvailable() == false) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return AlertDialog(
+                                      title: Text(
+                                          'You are offline\nPlease connect and retry'),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text('OK'),
+                                          onPressed: () {
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  });
+
+                              return;
+                            }
+
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            double totalQuestions =
+                                prefs.getDouble('t_questions') ?? 20.0;
+                            double totalSeconds =
+                                prefs.getDouble('t_seconds') ?? 20.0;
+
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return QuestionsScreen(
+                                  chapter: chapter,
+                                  tQuestions: totalQuestions,
+                                  tSeconds: totalSeconds);
+                            }));
                           },
                           child: Container(
-
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                Text('Start Quiz', style: TextStyle(color: Colors.green),),
-                                IconButton(icon: Icon(Icons.arrow_right,color: Colors.green,),),
+                                Text(
+                                  'Start Quiz',
+                                  style: TextStyle(color: Colors.green),
+                                ),
+                                Icon(
+                                    Icons.arrow_right,
+                                    color: Colors.green,
+                                  ),
+
                               ],
                             ),
                           ),
@@ -157,7 +202,7 @@ class ChapterCard extends StatelessWidget {
                 alignment: Alignment.center,
                 width: 150.0,
                 height: 150.0,
-                child: Image.asset('assets/images/bio.png'),
+                child: Image.asset(chapter.img),
               ),
             ),
           ],
