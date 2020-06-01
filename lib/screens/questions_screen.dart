@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:biologyquiz/model/chapter.dart';
 import 'package:biologyquiz/model/question.dart';
+import 'package:biologyquiz/screens/result_screen.dart';
 import 'package:biologyquiz/util/util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 children: <Widget>[
                   InkWell(
                       onTap: () {
-                       // Navigator.of(context).pop();
+                        // Navigator.of(context).pop();
                       },
                       child: Icon(
                         Icons.arrow_back,
@@ -147,7 +148,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                       } else {
                         List<Question> questions = snapshot.data;
 
-                        return QuizWidget(questions: questions, totalSeconds: widget.tSeconds.toInt(),);
+                        return QuizWidget(
+                          questions: questions,
+                          totalSeconds: widget.tSeconds.toInt(),
+                          chapter: widget.chapter,
+                        );
                       }
                     } else {
                       return Center(
@@ -167,18 +172,17 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
 // creates the whole UI after questions are fetched from firestore
 class QuizWidget extends StatefulWidget {
-
   final List<Question> questions;
   final int totalSeconds;
+  final Chapter chapter;
 
-  QuizWidget({this.questions, this.totalSeconds});
+  QuizWidget({this.questions, this.totalSeconds, this.chapter});
 
   @override
   _QuizWidgetState createState() => _QuizWidgetState();
 }
 
 class _QuizWidgetState extends State<QuizWidget> {
-
   int currentQuestionIndex;
   int totalCorrect;
   int totalWrong;
@@ -187,7 +191,6 @@ class _QuizWidgetState extends State<QuizWidget> {
   int _currentSecond;
 
   void startTimer() {
-
     //_currentSecond = widget.totalSeconds;
 
     if (_timer != null) {
@@ -197,11 +200,10 @@ class _QuizWidgetState extends State<QuizWidget> {
 
     const oneSec = const Duration(seconds: 1);
 
-
     _timer = new Timer.periodic(
       oneSec,
-          (Timer timer) => setState(
-            () {
+      (Timer timer) => setState(
+        () {
           if (_currentSecond < 1) {
             timer.cancel();
             goToNextQuestion();
@@ -229,19 +231,23 @@ class _QuizWidgetState extends State<QuizWidget> {
       child: Column(
         children: <Widget>[
           Container(
-            margin:
-            EdgeInsets.symmetric(vertical: 8.0),
+            margin: EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Time $_currentSecond', style: TextStyle(color: Colors.white),),
-                Text('${currentQuestionIndex + 1} of ${widget.questions.length}', style: TextStyle(color: Colors.white),),
+                Text(
+                  'Time $_currentSecond',
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  '${currentQuestionIndex + 1} of ${widget.questions.length}',
+                  style: TextStyle(color: Colors.white),
+                ),
               ],
             ),
           ),
           Container(
-            margin:
-            EdgeInsets.symmetric(vertical: 8.0),
+            margin: EdgeInsets.symmetric(vertical: 8.0),
             padding: EdgeInsets.all(10.0),
             height: 100,
             decoration: BoxDecoration(
@@ -258,7 +264,6 @@ class _QuizWidgetState extends State<QuizWidget> {
           ),
           Expanded(
             child: Container(
-
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -283,9 +288,7 @@ class _QuizWidgetState extends State<QuizWidget> {
                     },
                   ),
                   RaisedButton(
-                    child: Text(
-                     widget.questions[currentQuestionIndex].c
-                    ),
+                    child: Text(widget.questions[currentQuestionIndex].c),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
                     onPressed: () {
@@ -306,12 +309,10 @@ class _QuizWidgetState extends State<QuizWidget> {
               ),
             ),
           ),
-
         ],
       ),
     );
   }
-
 
   void check(String text) {
     if (text == widget.questions[currentQuestionIndex].ans) {
@@ -330,12 +331,26 @@ class _QuizWidgetState extends State<QuizWidget> {
       //print('Can\'t go forward');
       //print('Total Correct $totalCorrect\nTotal Wrong $totalWrong');
       print('result screen coming soon');
-      //showResult();
+
       _timer.cancel();
+      showResult();
     } else {
       currentQuestionIndex++;
       startTimer();
       setState(() {});
     }
+  }
+
+  void showResult() {
+    // _countdownTimer.cancel();
+
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+      return ResultScreen(
+          name: widget.chapter.name,
+          tSeconds: widget.totalSeconds,
+          totalCorrect: totalCorrect,
+          totalWrong: totalWrong,
+          questions: widget.questions);
+    }));
   }
 }
