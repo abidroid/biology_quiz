@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>832257780735-git12emi52vet4ger2ot0p6o7r7kj697.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.832257780735-git12emi52vet4ger2ot0p6o7r7kj697</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>832257780735-j3feqg46h9a8j549n3c0q928jqop716t.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAVuHq8c1sPBb29Qf-d3ASkejAqas51QWQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>832257780735</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.intellilogics.biologyquiz</string>
+	<key>PROJECT_ID</key>
+	<string>biologymcqs</string>
+	<key>STORAGE_BUCKET</key>
+	<string>biologymcqs.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:832257780735:ios:0f71b118407bb52dd295ca</string>
+	<key>DATABASE_URL</key>
+	<string>https://biologymcqs.firebaseio.com</string>
+</dict>
+</plist>

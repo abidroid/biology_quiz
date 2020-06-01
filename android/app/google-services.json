@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "832257780735",
+    "firebase_url": "https://biologymcqs.firebaseio.com",
+    "project_id": "biologymcqs",
+    "storage_bucket": "biologymcqs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832257780735:android:200e50617a62ff5ed295ca",
+        "android_client_info": {
+          "package_name": "com.intellilogics.biologyquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832257780735-9jj1mgo1cctdp35gqoek26li3qd1llho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYV1ibyxKbgWFNKN_cFs6lqLRvLj9r-Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832257780735-9jj1mgo1cctdp35gqoek26li3qd1llho.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "832257780735-git12emi52vet4ger2ot0p6o7r7kj697.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.intellilogics.biologyquiz"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832257780735:android:83b02534274b04cb",
+        "android_client_info": {
+          "package_name": "com.jackassapps.biologymcqs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832257780735-j3feqg46h9a8j549n3c0q928jqop716t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jackassapps.biologymcqs",
+            "certificate_hash": "814ce91d4355435ed0bcc211292bcda34600e019"
+          }
+        },
+        {
+          "client_id": "832257780735-9jj1mgo1cctdp35gqoek26li3qd1llho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYV1ibyxKbgWFNKN_cFs6lqLRvLj9r-Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832257780735-9jj1mgo1cctdp35gqoek26li3qd1llho.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "832257780735-git12emi52vet4ger2ot0p6o7r7kj697.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.intellilogics.biologyquiz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
