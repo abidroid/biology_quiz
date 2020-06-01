@@ -329,6 +329,7 @@ class _QuizWidgetState extends State<QuizWidget> {
     if (currentQuestionIndex == widget.questions.length - 1) {
       //print('Can\'t go forward');
       //print('Total Correct $totalCorrect\nTotal Wrong $totalWrong');
+      print('result screen coming soon');
       //showResult();
       _timer.cancel();
     } else {
