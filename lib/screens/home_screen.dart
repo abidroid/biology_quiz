@@ -116,11 +116,12 @@ class ChapterCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          margin: EdgeInsets.only(top: 16.0),
+                            padding: EdgeInsets.symmetric(horizontal: 10.0),
                             child: Text(
                               '${chapter.name}',
                               style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 28,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black.withOpacity(0.7)),
                             )),
@@ -130,11 +131,11 @@ class ChapterCard extends StatelessWidget {
                         Container(
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
                             child: Text(
-                              '${chapter.name}',
+                              '${chapter.desc}',
                               style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
                                   color: Colors.black.withOpacity(0.7)),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 4,
                             )),
                         Spacer(),
                         InkWell(
@@ -198,11 +199,11 @@ class ChapterCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 50,
+              left: 35,
               child: Container(
                 alignment: Alignment.center,
-                width: 150.0,
-                height: 150.0,
+                width: 180.0,
+                height: 180.0,
                 child: Image.asset(chapter.img),
               ),
             ),
