@@ -1,4 +1,5 @@
 import 'package:biologyquiz/model/question.dart';
+import 'package:biologyquiz/screens/correct_anwers_screen.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -203,6 +204,11 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
                 onPressed: () {
                   //_showAd();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context){
+                     return CorrectAnswersScreen(questions: widget.questions, name: widget.name,);
+                    }
+                  ));
                 },
               ),
             )
