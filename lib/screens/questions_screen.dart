@@ -132,13 +132,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               borderRadius: BorderRadius.circular(16.0),
                             ),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 SpinKitCircle(
                                   color: Colors.pink,
-                                  size: 40,
-                                ),
-                                SizedBox(
-                                  height: 16.0,
+                                  size: 50,
                                 ),
                                 Text('Loading Quiz'),
                               ],

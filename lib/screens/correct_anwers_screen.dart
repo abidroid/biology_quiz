@@ -1,3 +1,4 @@
+
 import 'package:biologyquiz/model/question.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,20 @@ class CorrectAnswersScreen extends StatefulWidget {
 }
 
 class _CorrectAnswersScreenState extends State<CorrectAnswersScreen> {
-  bool expanded = false;
 
+  List<bool> expanded;
+
+  @override
+  void initState() {
+    super.initState();
+
+    expanded = List(widget.questions.length);
+
+    for( int i = 0; i < widget.questions.length; i++ ){
+      expanded[i] = false;
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,12 +80,13 @@ class _CorrectAnswersScreenState extends State<CorrectAnswersScreen> {
                   Question question = widget.questions[index];
                   return ExpansionTile(
                     onExpansionChanged: (value) {
+                      expanded[index] = value;
+
                       setState(() {
-                        expanded = value;
                       });
                     },
                     trailing: Icon(
-                      expanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                      expanded[index] == true ? Icons.arrow_drop_up : Icons.arrow_drop_down,
                       color: Colors.white70,
                     ),
                     title: Text(

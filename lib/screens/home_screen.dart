@@ -176,6 +176,8 @@ class ChapterCard extends StatelessWidget {
                             }));
                           },
                           child: Container(
+                            alignment: Alignment.bottomRight,
+                            margin: EdgeInsets.only(bottom: 16.0, right: 16.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
@@ -184,10 +186,9 @@ class ChapterCard extends StatelessWidget {
                                   style: TextStyle(color: Colors.green),
                                 ),
                                 Icon(
-                                    Icons.arrow_right,
-                                    color: Colors.green,
-                                  ),
-
+                                  Icons.arrow_right,
+                                  color: Colors.green,
+                                ),
                               ],
                             ),
                           ),
