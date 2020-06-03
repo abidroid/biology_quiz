@@ -31,7 +31,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   Colors.blue,
                 ]),
             color: Colors.green),
-        child: ListView(
+        child: Column(
           children: <Widget>[
             Row(
               children: <Widget>[
