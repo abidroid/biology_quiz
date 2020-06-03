@@ -30,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              //margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,

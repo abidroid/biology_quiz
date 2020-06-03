@@ -31,7 +31,7 @@ class _CorrectAnswersScreenState extends State<CorrectAnswersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 10),
       decoration: BoxDecoration(
         gradient: LinearGradient(
             begin: Alignment.topCenter,
