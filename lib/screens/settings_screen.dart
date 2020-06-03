@@ -22,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 10),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 50, bottom: 10),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,

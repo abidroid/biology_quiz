@@ -71,7 +71,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       child: Scaffold(
         body: Container(
           //padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 10),
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 50, bottom: 10),
 
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -190,6 +191,8 @@ class _QuizWidgetState extends State<QuizWidget> {
   Timer _timer;
   int _currentSecond;
 
+  EdgeInsets buttonPadding = EdgeInsets.symmetric(horizontal: 8, vertical: 8);
+
   void startTimer() {
     //_currentSecond = widget.totalSeconds;
 
@@ -249,58 +252,74 @@ class _QuizWidgetState extends State<QuizWidget> {
           Container(
             margin: EdgeInsets.symmetric(vertical: 8.0),
             padding: EdgeInsets.all(10.0),
-            height: 100,
+            height: 140,
             decoration: BoxDecoration(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.black54
-                    : Colors.grey[200]),
+              color: Colors.white.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(4.0),
+            ),
             alignment: Alignment.center,
             child: Text(
               widget.questions[currentQuestionIndex].q,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
+                height: 1.5,
               ),
             ),
           ),
           Expanded(
             child: Container(
+              margin: EdgeInsets.only(top: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   RaisedButton(
+                    padding: buttonPadding,
                     child: Text(
                       widget.questions[currentQuestionIndex].a,
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
+                        borderRadius: BorderRadius.circular(16.0)),
                     onPressed: () {
                       check(widget.questions[currentQuestionIndex].a);
                     },
                   ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
                   RaisedButton(
+                    padding: buttonPadding,
                     child: Text(
                       widget.questions[currentQuestionIndex].b,
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
                     onPressed: () {
                       check(widget.questions[currentQuestionIndex].b);
                     },
                   ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
                   RaisedButton(
+                    padding: buttonPadding,
                     child: Text(widget.questions[currentQuestionIndex].c),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
+                        borderRadius: BorderRadius.circular(16.0)),
                     onPressed: () {
                       check(widget.questions[currentQuestionIndex].c);
                     },
                   ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
                   RaisedButton(
+                    padding: buttonPadding,
                     child: Text(
                       widget.questions[currentQuestionIndex].d,
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
+                        borderRadius: BorderRadius.circular(16.0)),
                     onPressed: () {
                       check(widget.questions[currentQuestionIndex].d);
                     },
